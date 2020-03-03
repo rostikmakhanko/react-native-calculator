@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'remx';
 import {store} from './stores/store';
 import MyButton from './MyButton';
+import {onButtonPress} from './stores/actions';
 
 const buttonLabels = [
   ['AC', '+/-', '%', '÷'],
@@ -13,13 +14,6 @@ const buttonLabels = [
 ];
 
 const App = () => {
-  const [currentValue, setCurrentValue] = useState(0);
-
-  const onPress = (event: React.FormEvent<HTMLButtonElement>) => {
-    store.setCurrentValue();
-    setCurrentValue(currentValue + 1);
-  };
-
   return (
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.header}>
@@ -29,7 +23,14 @@ const App = () => {
         {buttonLabels.map((buttonsRow, i) => (
           <View style={styles.buttonsRow}>
             {buttonsRow.map((item, j) => {
-              return <MyButton key={item} value={item} positionInRow={j} />;
+              return (
+                <MyButton
+                  onPress={onButtonPress}
+                  key={item}
+                  value={item}
+                  positionInRow={j}
+                />
+              );
             })}
           </View>
         ))}
@@ -38,7 +39,7 @@ const App = () => {
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   header: {
     backgroundColor: '#505254',
     flex: 2,
@@ -68,7 +69,7 @@ const styles = {
     borderWidth: 1,
   },
   buttonText: {color: 'white', fontSize: 35},
-};
+});
 
 function mapStateToProps(ownProps) {
   return {

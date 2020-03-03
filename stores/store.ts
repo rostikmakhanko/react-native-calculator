@@ -1,14 +1,13 @@
 import * as remx from 'remx';
-import {setCurrentValue} from './actions';
 
-const initialState = {
+const initialState = () => ({
   currentValue: '0',
   operator: '',
   firstOperand: '',
   waitForNewCurrentValue: false,
-};
+});
 
-const state = remx.state(initialState);
+const state = remx.state(initialState());
 
 const getters = remx.getters({
   getCurrentValue() {
@@ -30,10 +29,10 @@ const getters = remx.getters({
 
 const setters = remx.setters({
   setDefaultState() {
-    state.currentValue = '0';
-    state.operator = '';
-    state.firstOperand = '';
-    state.waitForNewCurrentValue = false;
+    const initState = initialState();
+    Object.keys(initState)
+      // @ts-ignore
+      .forEach(key => (state[key] = initState[key]));
   },
 
   setCurrentValue(value) {
@@ -68,13 +67,26 @@ const setters = remx.setters({
     store.setCurrentValue(state.firstOperand + state.currentValue);
   },
 
-  performOperation(operation) {
+  performOperation() {
+    const operation = state.operator;
+    if (
+      operation === '' ||
+      state.firstOperand === '' ||
+      state.currentValue === ''
+    ) {
+      return;
+    }
     const firstOperand = +state.firstOperand;
     const secondOperand = +state.currentValue;
-    if (operation === '+') {
+    if (operation === '+' || operation === '-') {
       store.setFirstOperand(store.getCurrentValue());
     }
-    store.setCurrentValue((firstOperand + secondOperand).toString());
+    if (operation === '+') {
+      store.setCurrentValue((firstOperand + secondOperand).toString());
+    }
+    if (operation === '-') {
+      store.setCurrentValue((firstOperand - secondOperand).toString());
+    }
     console.log((firstOperand + secondOperand).toString());
   },
 });

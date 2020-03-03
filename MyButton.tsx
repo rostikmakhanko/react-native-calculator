@@ -1,47 +1,14 @@
-import React, {useRef, useState} from 'react';
-import {connect} from 'remx';
-import {store} from './stores/store';
-
-import {Text, TouchableOpacity} from 'react-native';
-import {isWaitingForNewCurrentValue} from './stores/actions';
+import React from 'react';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyButtonProps {
   key: string;
   value: string;
   positionInRow: number;
+  onPress: (buttonSymbol: string) => void;
 }
 
 const MyButton: React.FC<MyButtonProps> = props => {
-  const onPress = () => {
-    if (props.value === 'AC') {
-      store.setDefaultState();
-    } else if (props.value === '+/-') {
-      store.reverseCurrentValue();
-    } else if (props.value >= '0' && props.value <= '9') {
-      if (store.isWaitingForNewCurrentValue()) {
-        store.setFirstOperand(store.getCurrentValue());
-        store.setCurrentValue(props.value);
-        store.setIsWaitingForNewCurrentValue(false);
-        return;
-      }
-      if (store.getCurrentValue() === '0') {
-        store.setCurrentValue(props.value);
-      } else {
-        store.setCurrentValue(store.getCurrentValue() + props.value);
-      }
-    } else if (props.value === '+') {
-      if (store.isWaitingForNewCurrentValue()) {
-        return;
-      }
-      store.performOperation(props.value);
-      store.setOperator(props.value);
-      store.setIsWaitingForNewCurrentValue(true);
-    } else if (props.value === '=') {
-      store.performOperation(props.value);
-      store.setIsWaitingForNewCurrentValue(true);
-    }
-  };
-
   return (
     <TouchableOpacity
       style={
@@ -49,13 +16,13 @@ const MyButton: React.FC<MyButtonProps> = props => {
           ? styles.buttonViewGrey
           : styles.buttonViewOrange
       }
-      onPress={onPress}>
+      onPress={() => props.onPress(props.value)}>
       <Text style={styles.buttonText}>{props.value}</Text>
     </TouchableOpacity>
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   buttonViewGrey: {
     height: '100%',
     backgroundColor: 'grey',
@@ -75,6 +42,6 @@ const styles = {
     borderWidth: 1,
   },
   buttonText: {color: 'white', fontSize: 35},
-};
+});
 
 export default MyButton;
