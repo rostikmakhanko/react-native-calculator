@@ -71,6 +71,7 @@ const setters = remx.setters({
   performOperation() {
     const firstOperand = +state.firstOperand;
     const secondOperand = +state.currentValue;
+    store.setFirstOperand(store.getCurrentValue());
     store.setCurrentValue((firstOperand + secondOperand).toString());
     console.log((firstOperand + secondOperand).toString());
   },
