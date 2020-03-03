@@ -3,6 +3,9 @@ import {setCurrentValue} from './actions';
 
 const initialState = {
   currentValue: '0',
+  operator: '',
+  firstOperand: '',
+  waitForNewCurrentValue: false,
 };
 
 const state = remx.state(initialState);
@@ -11,11 +14,42 @@ const getters = remx.getters({
   getCurrentValue() {
     return state.currentValue;
   },
+
+  getOperator() {
+    return state.operator;
+  },
+
+  getFirstOperand() {
+    return state.firstOperand;
+  },
+
+  isWaitingForNewCurrentValue() {
+    return state.waitForNewCurrentValue;
+  },
 });
 
 const setters = remx.setters({
+  setDefaultState() {
+    state.currentValue = '0';
+    state.operator = '';
+    state.firstOperand = '';
+    state.waitForNewCurrentValue = false;
+  },
+
   setCurrentValue(value) {
     state.currentValue = value;
+  },
+
+  setOperator(value) {
+    state.operator = value;
+  },
+
+  setFirstOperand(value) {
+    state.firstOperand = value;
+  },
+
+  setIsWaitingForNewCurrentValue(value: boolean) {
+    state.waitForNewCurrentValue = value;
   },
 
   reverseCurrentValue() {
@@ -24,10 +58,21 @@ const setters = remx.setters({
       return;
     }
     if (currentValue[0] === '-') {
-      setCurrentValue(currentValue.substring(1));
+      store.setCurrentValue(currentValue.substring(1));
     } else {
-      setCurrentValue('-' + currentValue);
+      store.setCurrentValue('-' + currentValue);
     }
+  },
+
+  addition() {
+    store.setCurrentValue(state.firstOperand + state.currentValue);
+  },
+
+  performOperation() {
+    const firstOperand = +state.firstOperand;
+    const secondOperand = +state.currentValue;
+    store.setCurrentValue((firstOperand + secondOperand).toString());
+    console.log((firstOperand + secondOperand).toString());
   },
 });
 

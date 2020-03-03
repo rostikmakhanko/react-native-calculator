@@ -3,6 +3,7 @@ import {connect} from 'remx';
 import {store} from './stores/store';
 
 import {Text, TouchableOpacity} from 'react-native';
+import {isWaitingForNewCurrentValue} from './stores/actions';
 
 interface MyButtonProps {
   key: string;
@@ -13,13 +14,27 @@ interface MyButtonProps {
 const MyButton: React.FC<MyButtonProps> = props => {
   const onPress = () => {
     if (props.value === 'AC') {
-      store.setCurrentValue(0);
+      store.setDefaultState();
     } else if (props.value === '+/-') {
-      console.log(11);
       store.reverseCurrentValue();
     } else if (props.value >= '0' && props.value <= '9') {
-      if (store.getCurrentValue() == '0') {store.setCurrentValue(props.value);}
-      else {store.setCurrentValue(store.getCurrentValue() + props.value);}
+      if (store.isWaitingForNewCurrentValue()) {
+        store.setFirstOperand(store.getCurrentValue());
+        store.setCurrentValue(props.value);
+        store.setIsWaitingForNewCurrentValue(false);
+        return;
+      }
+      if (store.getCurrentValue() === '0') {
+        store.setCurrentValue(props.value);
+      } else {
+        store.setCurrentValue(store.getCurrentValue() + props.value);
+      }
+    } else if (props.value === '+') {
+      store.performOperation();
+      store.setOperator(props.value);
+      store.setIsWaitingForNewCurrentValue(true);
+    } else if (props.value === '=') {
+      store.performOperation();
     }
   };
 
