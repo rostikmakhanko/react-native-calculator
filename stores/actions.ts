@@ -28,8 +28,8 @@ export function setOperator(value) {
   store.setOperator(value);
 }
 
-export function performOperation() {
-  store.performOperation();
+export function performOperation(operation) {
+  store.performOperation(operation);
 }
 
 export function setDefaultState() {

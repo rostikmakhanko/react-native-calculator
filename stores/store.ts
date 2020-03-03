@@ -68,10 +68,12 @@ const setters = remx.setters({
     store.setCurrentValue(state.firstOperand + state.currentValue);
   },
 
-  performOperation() {
+  performOperation(operation) {
     const firstOperand = +state.firstOperand;
     const secondOperand = +state.currentValue;
-    store.setFirstOperand(store.getCurrentValue());
+    if (operation === '+') {
+      store.setFirstOperand(store.getCurrentValue());
+    }
     store.setCurrentValue((firstOperand + secondOperand).toString());
     console.log((firstOperand + secondOperand).toString());
   },

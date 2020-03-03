@@ -33,11 +33,12 @@ const MyButton: React.FC<MyButtonProps> = props => {
       if (store.isWaitingForNewCurrentValue()) {
         return;
       }
-      store.performOperation();
+      store.performOperation(props.value);
       store.setOperator(props.value);
       store.setIsWaitingForNewCurrentValue(true);
     } else if (props.value === '=') {
-      store.performOperation();
+      store.performOperation(props.value);
+      store.setIsWaitingForNewCurrentValue(true);
     }
   };
 
