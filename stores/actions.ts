@@ -7,3 +7,7 @@ export function setCurrentValue(value) {
 export function getCurrentValue() {
   return store.getCurrentValue();
 }
+
+export function reverseCurrentValue() {
+  return store.reverseCurrentValue();
+}

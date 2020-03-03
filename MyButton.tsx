@@ -15,10 +15,11 @@ const MyButton: React.FC<MyButtonProps> = props => {
     if (props.value === 'AC') {
       store.setCurrentValue(0);
     } else if (props.value === '+/-') {
-      store.reelse
-    } if (props.value >= '0' && props.value <= '9') {
-      if (store.getCurrentValue() == '0') store.setCurrentValue(props.value);
-      else store.setCurrentValue(store.getCurrentValue() + props.value);
+      console.log(11);
+      store.reverseCurrentValue();
+    } else if (props.value >= '0' && props.value <= '9') {
+      if (store.getCurrentValue() == '0') {store.setCurrentValue(props.value);}
+      else {store.setCurrentValue(store.getCurrentValue() + props.value);}
     }
   };
 

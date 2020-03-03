@@ -1,5 +1,5 @@
 import * as remx from 'remx';
-import {setCurrentValue} from "./actions";
+import {setCurrentValue} from './actions';
 
 const initialState = {
   currentValue: '0',
@@ -10,7 +10,7 @@ const state = remx.state(initialState);
 const getters = remx.getters({
   getCurrentValue() {
     return state.currentValue;
-  }
+  },
 });
 
 const setters = remx.setters({
@@ -20,14 +20,18 @@ const setters = remx.setters({
 
   reverseCurrentValue() {
     const currentValue = state.currentValue;
-    if (currentValue === '0') return;
-    if (currentValue[0] === '-') {
-      state.currentValue = currentValue.substring(1);
+    if (currentValue === '0') {
+      return;
     }
-  }
+    if (currentValue[0] === '-') {
+      setCurrentValue(currentValue.substring(1));
+    } else {
+      setCurrentValue('-' + currentValue);
+    }
+  },
 });
 
 export const store = {
   ...setters,
-  ...getters
+  ...getters,
 };
