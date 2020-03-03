@@ -1,9 +1,5 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  Text,
-  View,
-} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import {connect} from 'remx';
 import {store} from './stores/store';
 import MyButton from './MyButton';
@@ -11,6 +7,7 @@ import MyButton from './MyButton';
 const buttonLabels = [
   ['AC', '+/-', '%', '÷'],
   ['7', '8', '9', '*'],
+  ['4', '5', '6', '-'],
   ['1', '2', '3', '+'],
   ['0', ',', '?', '='],
 ];
