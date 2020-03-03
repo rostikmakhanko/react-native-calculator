@@ -1,4 +1,4 @@
-import { store } form "./store";
+import { store } from "./store";
 
 export function setCurrentValue(value) {
   store.setCurrentValue(value);
