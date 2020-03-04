@@ -78,14 +78,15 @@ const setters = remx.setters({
     }
     const firstOperand = +state.firstOperand;
     const secondOperand = +state.currentValue;
-    if (operation === '+' || operation === '-') {
+    if (operation === '+' || operation === '-' || operation === '*') {
       store.setFirstOperand(store.getCurrentValue());
     }
     if (operation === '+') {
       store.setCurrentValue((firstOperand + secondOperand).toString());
-    }
-    if (operation === '-') {
+    } else if (operation === '-') {
       store.setCurrentValue((firstOperand - secondOperand).toString());
+    } else if (operation === '*') {
+      store.setCurrentValue((firstOperand * secondOperand).toString());
     }
     console.log((firstOperand + secondOperand).toString());
   },

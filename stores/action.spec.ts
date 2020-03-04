@@ -29,11 +29,19 @@ describe('Calculator', () => {
     expect(store.getCurrentValue()).toBe('5');
   });
 
-  xit('when subtracting 1 by 3 should return 2', function() {
+  it('when subtracting 1 by 3 should return 2', function() {
     onButtonPress('3');
     onButtonPress('-');
     onButtonPress('1');
     onButtonPress('=');
     expect(store.getCurrentValue()).toBe('2');
   });
+
+  it('when multiply 2 and 5 should return 10', function () {
+    onButtonPress('2');
+    onButtonPress('*');
+    onButtonPress('5');
+    onButtonPress('=');
+    expect(store.getCurrentValue()).toBe('10');
+  })
 });
