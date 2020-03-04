@@ -87,6 +87,8 @@ const setters = remx.setters({
       store.setCurrentValue((firstOperand - secondOperand).toString());
     } else if (operation === '*') {
       store.setCurrentValue((firstOperand * secondOperand).toString());
+    } else if (operation === '/') {
+      store.setCurrentValue((firstOperand / secondOperand).toString());
     }
     console.log((firstOperand + secondOperand).toString());
   },

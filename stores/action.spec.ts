@@ -43,5 +43,13 @@ describe('Calculator', () => {
     onButtonPress('5');
     onButtonPress('=');
     expect(store.getCurrentValue()).toBe('10');
-  })
+  });
+
+  it('when divide 12 by 4 should return 3', function () {
+    onButtonPress('12');
+    onButtonPress('/');
+    onButtonPress('4');
+    onButtonPress('=');
+    expect(store.getCurrentValue()).toBe('3');
+  });
 });

@@ -53,7 +53,12 @@ export const onButtonPress = (buttonSymbol: string) => {
     } else {
       store.setCurrentValue(store.getCurrentValue() + buttonSymbol);
     }
-  } else if (buttonSymbol === '+' || buttonSymbol === '-' || buttonSymbol === '*') {
+  } else if (
+    buttonSymbol === '+' ||
+    buttonSymbol === '-' ||
+    buttonSymbol === '*' ||
+    buttonSymbol === '/'
+  ) {
     //check how many places you will need to change in order to handle minus
     if (store.isWaitingForNewCurrentValue()) {
       store.setOperator(buttonSymbol);
