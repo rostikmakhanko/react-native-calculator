@@ -36,19 +36,28 @@ export function setDefaultState() {
   store.setDefaultState();
 }
 
+export function getIsLastPressedButtonWasEqual() {
+  return store.getIsLastPressedButtonWasEqual();
+}
+
+export function setIsLastPressedButtonWasEqual(value) {
+  return store.setIsLastPressedButtonWasEqual(value);
+}
+
 export const onButtonPress = (buttonSymbol: string) => {
   if (buttonSymbol === 'AC') {
     store.setDefaultState();
   } else if (buttonSymbol === '+/-') {
     store.reverseCurrentValue();
   } else if (buttonSymbol >= '0' && buttonSymbol <= '9') {
+    if (store.getIsLastPressedButtonWasEqual()) {
+      store.setDefaultState();
+    }
     if (store.isWaitingForNewCurrentValue()) {
       store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue(buttonSymbol);
       store.setIsWaitingForNewCurrentValue(false);
-      return;
-    }
-    if (store.getCurrentValue() === '0') {
+    } else if (store.getCurrentValue() === '0') {
       store.setCurrentValue(buttonSymbol);
     } else {
       store.setCurrentValue(store.getCurrentValue() + buttonSymbol);
@@ -62,13 +71,18 @@ export const onButtonPress = (buttonSymbol: string) => {
     //check how many places you will need to change in order to handle minus
     if (store.isWaitingForNewCurrentValue()) {
       store.setOperator(buttonSymbol);
-      return;
+    } else {
+      store.performOperation();
+      store.setOperator(buttonSymbol);
+      store.setIsWaitingForNewCurrentValue(true);
     }
-    store.performOperation();
-    store.setOperator(buttonSymbol);
-    store.setIsWaitingForNewCurrentValue(true);
   } else if (buttonSymbol === '=') {
     store.performOperation();
     store.setIsWaitingForNewCurrentValue(true);
+  }
+  if (buttonSymbol === '=') {
+    store.setIsLastPressedButtonWasEqual(true);
+  } else {
+    store.setIsLastPressedButtonWasEqual(false);
   }
 };

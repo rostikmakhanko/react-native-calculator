@@ -5,6 +5,7 @@ const initialState = () => ({
   operator: '',
   firstOperand: '',
   waitForNewCurrentValue: false,
+  isLastPressedButtonWasEqual: false,
 });
 
 const state = remx.state(initialState());
@@ -24,6 +25,10 @@ const getters = remx.getters({
 
   isWaitingForNewCurrentValue() {
     return state.waitForNewCurrentValue;
+  },
+
+  getIsLastPressedButtonWasEqual() {
+    return state.isLastPressedButtonWasEqual;
   },
 });
 
@@ -49,6 +54,10 @@ const setters = remx.setters({
 
   setIsWaitingForNewCurrentValue(value: boolean) {
     state.waitForNewCurrentValue = value;
+  },
+
+  setIsLastPressedButtonWasEqual(value) {
+    state.isLastPressedButtonWasEqual = value;
   },
 
   reverseCurrentValue() {
