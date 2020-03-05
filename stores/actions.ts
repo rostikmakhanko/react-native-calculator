@@ -72,7 +72,9 @@ export const onButtonPress = (buttonSymbol: string) => {
     buttonSymbol === '*' ||
     buttonSymbol === '/'
   ) {
-    //check how many places you will need to change in order to handle minus
+    if (store.getIsLastPressedButtonWasEqual()) {
+      store.setFirstOperand('');
+    }
     if (store.isWaitingForNewCurrentValue()) {
       store.setOperator(buttonSymbol);
     } else {

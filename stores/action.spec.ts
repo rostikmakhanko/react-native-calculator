@@ -52,4 +52,14 @@ describe('Calculator', () => {
     onButtonPress('=');
     expect(store.getCurrentValue()).toBe('3');
   });
+
+  it('when adding two numbers, press equals than press minus and equals again should not change result', function () {
+    onButtonPress('1');
+    onButtonPress('+');
+    onButtonPress('2');
+    onButtonPress('=');
+    onButtonPress('-');
+    onButtonPress('=');
+    expect(store.getCurrentValue()).toBe('3');
+  })
 });
