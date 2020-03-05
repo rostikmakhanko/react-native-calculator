@@ -91,12 +91,16 @@ const setters = remx.setters({
       store.setFirstOperand(store.getCurrentValue());
     }
     if (operation === '+') {
+      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand + secondOperand).toString());
     } else if (operation === '-') {
+      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand - secondOperand).toString());
     } else if (operation === '*') {
+      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand * secondOperand).toString());
     } else if (operation === '/') {
+      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand / secondOperand).toString());
     }
     console.log((firstOperand + secondOperand).toString());
