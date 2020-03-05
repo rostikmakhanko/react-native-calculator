@@ -45,6 +45,10 @@ export function setIsLastPressedButtonWasEqual(value) {
 }
 
 export const onButtonPress = (buttonSymbol: string) => {
+  if (buttonSymbol === '=' && store.getIsLastPressedButtonWasEqual()) {
+    store.performOperationWithoutChangingFirstOperand();
+    return;
+  }
   if (buttonSymbol === 'AC') {
     store.setDefaultState();
   } else if (buttonSymbol === '+/-') {

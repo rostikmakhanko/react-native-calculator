@@ -87,23 +87,47 @@ const setters = remx.setters({
     }
     const firstOperand = +state.firstOperand;
     const secondOperand = +state.currentValue;
-    if (operation === '+' || operation === '-' || operation === '*') {
+    if (
+      operation === '+' ||
+      operation === '-' ||
+      operation === '*' ||
+      operation === '/'
+    ) {
       store.setFirstOperand(store.getCurrentValue());
     }
     if (operation === '+') {
-      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand + secondOperand).toString());
     } else if (operation === '-') {
-      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand - secondOperand).toString());
     } else if (operation === '*') {
-      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand * secondOperand).toString());
     } else if (operation === '/') {
-      store.setFirstOperand(store.getCurrentValue());
       store.setCurrentValue((firstOperand / secondOperand).toString());
     }
     console.log((firstOperand + secondOperand).toString());
+  },
+
+  performOperationWithoutChangingFirstOperand() {
+    const operation = state.operator;
+    if (
+      operation === '' ||
+      state.firstOperand === '' ||
+      state.currentValue === ''
+    ) {
+      return;
+    }
+    const firstOperand = +state.firstOperand;
+    const secondOperand = +state.currentValue;
+    if (operation === '+') {
+      store.setCurrentValue((firstOperand + secondOperand).toString());
+    } else if (operation === '-') {
+      store.setCurrentValue((secondOperand - firstOperand).toString());
+    } else if (operation === '*') {
+      store.setCurrentValue((firstOperand * secondOperand).toString());
+    } else if (operation === '/') {
+      store.setCurrentValue((secondOperand / firstOperand).toString());
+    }
+    console.log('|||');
   },
 });
 
