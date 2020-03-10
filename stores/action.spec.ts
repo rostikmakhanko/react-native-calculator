@@ -37,7 +37,7 @@ describe('Calculator', () => {
     expect(store.getCurrentValue()).toBe('2');
   });
 
-  it('when multiply 2 and 5 should return 10', function () {
+  it('when multiply 2 and 5 should return 10', function() {
     onButtonPress('2');
     onButtonPress('*');
     onButtonPress('5');
@@ -45,7 +45,7 @@ describe('Calculator', () => {
     expect(store.getCurrentValue()).toBe('10');
   });
 
-  it('when divide 12 by 4 should return 3', function () {
+  it('when divide 12 by 4 should return 3', function() {
     onButtonPress('12');
     onButtonPress('/');
     onButtonPress('4');
@@ -53,7 +53,7 @@ describe('Calculator', () => {
     expect(store.getCurrentValue()).toBe('3');
   });
 
-  it('when adding two numbers, press equals than press minus and equals again should not change result', function () {
+  it('when adding two numbers, press equals than press minus and equals again should not change result', function() {
     onButtonPress('1');
     onButtonPress('+');
     onButtonPress('2');
@@ -61,5 +61,5 @@ describe('Calculator', () => {
     onButtonPress('-');
     onButtonPress('=');
     expect(store.getCurrentValue()).toBe('3');
-  })
+  });
 });

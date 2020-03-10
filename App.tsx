@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import {connect} from 'remx';
 import {store} from './stores/store';
@@ -20,9 +20,9 @@ const App = () => {
         <Text style={styles.currentValue}>{store.getCurrentValue()}</Text>
       </View>
       <View style={styles.allButtons}>
-        {buttonLabels.map((buttonsRow, i) => (
+        {buttonLabels.map((buttonsRow: string[]) => (
           <View style={styles.buttonsRow}>
-            {buttonsRow.map((item, j) => {
+            {buttonsRow.map((item: string, j: number) => {
               return (
                 <MyButton
                   onPress={onButtonPress}
