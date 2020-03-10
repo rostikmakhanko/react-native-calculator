@@ -11,23 +11,23 @@ const initialState = () => ({
 const state = remx.state(initialState());
 
 const getters = remx.getters({
-  getCurrentValue() {
+  getCurrentValue(): string {
     return state.currentValue;
   },
 
-  getOperator() {
+  getOperator(): string {
     return state.operator;
   },
 
-  getFirstOperand() {
+  getFirstOperand(): string {
     return state.firstOperand;
   },
 
-  isWaitingForNewCurrentValue() {
+  isWaitingForNewCurrentValue(): boolean {
     return state.waitForNewCurrentValue;
   },
 
-  getIsLastPressedButtonWasEqual() {
+  getIsLastPressedButtonWasEqual(): boolean {
     return state.isLastPressedButtonWasEqual;
   },
 });
@@ -40,15 +40,15 @@ const setters = remx.setters({
       .forEach(key => (state[key] = initState[key]));
   },
 
-  setCurrentValue(value) {
+  setCurrentValue(value: string) {
     state.currentValue = value;
   },
 
-  setOperator(value) {
+  setOperator(value: string) {
     state.operator = value;
   },
 
-  setFirstOperand(value) {
+  setFirstOperand(value: string) {
     state.firstOperand = value;
   },
 
@@ -56,7 +56,7 @@ const setters = remx.setters({
     state.waitForNewCurrentValue = value;
   },
 
-  setIsLastPressedButtonWasEqual(value) {
+  setIsLastPressedButtonWasEqual(value: boolean) {
     state.isLastPressedButtonWasEqual = value;
   },
 

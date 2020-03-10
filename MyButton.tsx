@@ -2,7 +2,6 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 
 interface MyButtonProps {
-  key: string;
   value: string;
   positionInRow: number;
   onPress: (buttonSymbol: string) => void;
