@@ -1,22 +1,22 @@
 import {store} from './store';
 
-export function setCurrentValue(value) {
+export function setCurrentValue(value: string) {
   store.setCurrentValue(value);
 }
 
-export function getCurrentValue() {
+export function getCurrentValue(): string {
   return store.getCurrentValue();
 }
 
-export function getOperator() {
+export function getOperator(): string {
   return store.getOperator();
 }
 
-export function getFirstOperand() {
+export function getFirstOperand(): string {
   return store.getFirstOperand();
 }
 
-export function isWaitingForNewCurrentValue() {
+export function isWaitingForNewCurrentValue(): boolean {
   return store.isWaitingForNewCurrentValue();
 }
 
@@ -24,23 +24,23 @@ export function reverseCurrentValue() {
   return store.reverseCurrentValue();
 }
 
-export function setOperator(value) {
+export function setOperator(value: string) {
   store.setOperator(value);
 }
 
-export function performOperation(operation) {
-  store.performOperation(operation);
+export function performOperation() {
+  store.performOperation();
 }
 
 export function setDefaultState() {
   store.setDefaultState();
 }
 
-export function getIsLastPressedButtonWasEqual() {
+export function getIsLastPressedButtonWasEqual(): boolean {
   return store.getIsLastPressedButtonWasEqual();
 }
 
-export function setIsLastPressedButtonWasEqual(value) {
+export function setIsLastPressedButtonWasEqual(value: boolean) {
   return store.setIsLastPressedButtonWasEqual(value);
 }
 
